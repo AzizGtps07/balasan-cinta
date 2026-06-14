@@ -189,7 +189,6 @@
 
     <canvas id="heart-canvas"></canvas>
 
-    <!-- HALAMAN 1 -->
     <div id="page1" class="page active">
         <div class="container-h1">
             <h1 style="color:#FF69B4; font-size: 1.8rem; margin-top: 0;">Hai, Aku Punya Sesuatu... 🌸</h1>
@@ -198,16 +197,14 @@
         </div>
     </div>
 
-    <!-- HALAMAN 2 -->
     <div id="page2" class="page">
         <div class="second-page-content">
             <div class="photo-scroller-container">
                 <div class="photo-track">
-                    <!-- Ganti file foto di bawah ini dengan momen kebersamaan kalian -->
-                    <img src="foto11.png"><img src="foto22.png"><img src="foto33.png">
-                    <img src="foto44.png"><img src="foto55.png"><img src="foto66.png"><img src="foto77.png">
-                    <img src="foto11.png"><img src="foto22.png"><img src="foto33.png">
-                    <img src="foto44.png"><img src="foto55.png"><img src="foto66.png"><img src="foto77.png">
+                    <img src="foto1.jpg"><img src="foto2.jpg"><img src="foto3.jpg">
+                    <img src="foto4.jpg"><img src="foto5.jpg"><img src="foto6.jpg"><img src="foto roblox 2.png">
+                    <img src="foto1.jpg"><img src="foto2.jpg"><img src="foto3.jpg">
+                    <img src="foto4.jpg"><img src="foto5.jpg"><img src="foto6.jpg"><img src="foto roblox 2.png">
                 </div>
             </div>
             <div class="text-side">
@@ -223,10 +220,9 @@
         </div>
     </div>
 
-    <!-- HALAMAN 3 -->
     <div id="page3" class="page">
         <div class="container-h3">
-            <img src="foto11.png" class="img-penutup">
+            <img src="foto1.jpg" class="img-penutup">
             <p style="font-size: 0.8rem; opacity: 0.5; text-align: center;">(Scroll ke bawah jika teks terpotong)</p>
             <h2 style="color:#FF69B4; margin-top: 10px;">And My Answer Is... Yes! 🌹</h2>
             <div class="pesan-romantis">
@@ -241,13 +237,11 @@
         </div>
     </div>
 
-    <!-- Musik & Kontrol -->
     <div class="music-container">
         <button id="musicBtn">🔇</button>
         <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1">
     </div>
 
-    <!-- Masukkan lagu romantis di sini -->
     <audio id="bgMusic" loop><source src="lagu.mp3" type="audio/mp3"></audio>
 
     <script>
@@ -301,7 +295,6 @@
                 ctx.fillStyle = this.color;
                 ctx.globalAlpha = this.opacity;
                 ctx.beginPath();
-                // Menggambar lingkaran kelopak lembut
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); 
                 ctx.fill();
                 ctx.globalAlpha = 1.0;
