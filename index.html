@@ -1,1 +1,319 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Response for You</title>
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('foto kenangan.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: #ffffff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
 
+        .page {
+            display: none;
+            text-align: center;
+            width: 100%;
+            max-width: 1000px;
+            padding: 20px;
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        .active { display: block; }
+
+        /* Halaman 1 */
+        .container-h1 {
+            background: rgba(20, 10, 15, 0.75);
+            padding: 40px;
+            border: 3px solid #FF69B4;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.4);
+            max-width: 500px;
+            margin: 0 auto;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Halaman 2 Layout */
+        .second-page-content {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            background: rgba(20, 10, 15, 0.85);
+            padding: 20px;
+            border-radius: 20px;
+            border: 2px solid #FF69B4;
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.3);
+            height: 80vh; 
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .photo-scroller-container {
+            flex: 1;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .photo-track {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; 
+            animation: scrollSmoothUp 40s linear infinite; 
+        }
+
+        .photo-track img {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid #FF69B4;
+            display: block;
+        }
+
+        @keyframes scrollSmoothUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(calc(-50% - 7.5px)); }
+        }
+
+        .text-side {
+            flex: 1;
+            text-align: left;
+            padding-right: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .text-content {
+            overflow-y: auto;
+            flex-grow: 1;
+            padding-right: 10px;
+        }
+
+        .text-content::-webkit-scrollbar { width: 5px; }
+        .text-content::-webkit-scrollbar-thumb { background: #FF69B4; border-radius: 10px; }
+
+        .text-side h2 { color: #FF69B4; border-bottom: 1px solid #FF69B4; padding-bottom: 10px; margin-top: 0; font-size: 1.6rem; }
+        .text-content p { line-height: 1.8; margin-bottom: 15px; font-size: 1.05rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); color: #f0f0f0; }
+
+        /* Halaman 3 */
+        .container-h3 {
+            background: rgba(20, 10, 15, 0.85);
+            padding: 30px;
+            border: 2px solid #FF69B4;
+            border-radius: 20px;
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.3);
+            max-width: 600px;
+            max-height: 85vh; 
+            margin: 0 auto;
+            overflow-y: auto; 
+            animation: fadeIn 2s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .container-h3::-webkit-scrollbar { width: 5px; }
+        .container-h3::-webkit-scrollbar-thumb { background: #FF69B4; border-radius: 10px; }
+
+        .img-penutup {
+            width: 100%;
+            max-width: 280px;
+            border-radius: 15px;
+            border: 3px solid #FF69B4;
+            margin-bottom: 20px;
+        }
+
+        .pesan-romantis {
+            text-align: justify;
+            line-height: 1.7;
+            color: #eee;
+            font-size: 1rem;
+            padding: 0 10px;
+        }
+
+        /* Musik & Slider */
+        .music-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 8px 15px;
+            border-radius: 50px;
+            border: 2px solid #FF69B4;
+            z-index: 100;
+        }
+
+        #musicBtn { background: #FF69B4; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 20px; }
+        #volumeSlider { width: 70px; accent-color: #FF69B4; }
+
+        .btn-love {
+            background-color: #FF69B4;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+        }
+
+        .btn-love:hover { transform: scale(1.05); background-color: #fff; color: #FF69B4; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        #heart-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+
+        @media (max-width: 600px) {
+            .second-page-content { flex-direction: column; height: 90vh; }
+            .photo-scroller-container { height: 35%; }
+            .container-h3 { width: 90%; max-height: 80vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="heart-canvas"></canvas>
+
+    <!-- HALAMAN 1 -->
+    <div id="page1" class="page active">
+        <div class="container-h1">
+            <h1 style="color:#FF69B4; font-size: 1.8rem; margin-top: 0;">Hai, Aku Punya Sesuatu... 🌸</h1>
+            <p>Terima kasih ya buat kejutan manis kemarin. Aku sengaja bikin halaman ini khusus untuk menjawab pesanmu.</p>
+            <button class="btn-love" onclick="showPage(2)">Buka Suratnya ✨</button>
+        </div>
+    </div>
+
+    <!-- HALAMAN 2 -->
+    <div id="page2" class="page">
+        <div class="second-page-content">
+            <div class="photo-scroller-container">
+                <div class="photo-track">
+                    <!-- Ganti file foto di bawah ini dengan momen kebersamaan kalian -->
+                    <img src="foto11.png"><img src="foto22.png"><img src="foto33.png">
+                    <img src="foto44.png"><img src="foto55.png"><img src="foto66.png"><img src="foto77.png">
+                    <img src="foto11.png"><img src="foto22.png"><img src="foto33.png">
+                    <img src="foto44.png"><img src="foto55.png"><img src="foto66.png"><img src="foto77.png">
+                </div>
+            </div>
+            <div class="text-side">
+                <h2>Untuk Seseorang yang Menghiasi Hari-hariku</h2>
+                <div class="text-content">
+                    <p>Jujur, pas kamu nyatain perasaan kemarin, jantungku rasanya berdegup jauh lebih kencang dari biasanya. Aku sempat terdiam lama, bukan karena bingung, tapi karena bahagia sekaligus nggak menyangka kalau perasaan kita ternyata berjalan di arah yang sama.</p>
+                    <p>Selama ini, kehadiran kamu di hidupku selalu jadi hal yang paling aku tunggu. Di tengah lelahnya hari-hari atau rumitnya dunia nyata, ngobrol sama kamu, dengerin cerita kamu, atau sekadar tahu kalau kamu ada di dekatku selalu berhasil bikin semuanya terasa jauh lebih ringan.</p>
+                    <p>Aku sangat menghargai keberanianmu buat bilang langsung ke aku. Buatku, itu adalah hal paling manis dan berharga yang pernah aku terima. Kamu nggak cuma spesial karena apa yang kamu lakukan, tapi karena caramu memperlakukanku dengan tulus selama ini.</p>
+                    <p>Lewat tulisan sederhana di website ini, aku mau bilang kalau aku nggak mau momen ini berlalu begitu saja. Aku ingin kita menyimpan ingatan ini bukan lagi sebagai 'aku' dan 'kamu' yang saling menebak, tapi sebagai lembaran baru yang siap kita tulis bareng-bareng.</p>
+                </div>
+                <button class="btn-love" onclick="showPage(3)" style="width: fit-content; align-self: flex-end;">Halaman Selanjutnya ❤️</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HALAMAN 3 -->
+    <div id="page3" class="page">
+        <div class="container-h3">
+            <img src="foto11.png" class="img-penutup">
+            <p style="font-size: 0.8rem; opacity: 0.5; text-align: center;">(Scroll ke bawah jika teks terpotong)</p>
+            <h2 style="color:#FF69B4; margin-top: 10px;">And My Answer Is... Yes! 🌹</h2>
+            <div class="pesan-romantis">
+                <p>Aku mau. Mulai hari ini, mari kita melangkah di jalan yang sama. Terima kasih sudah memilihku, terima kasih sudah meletakkan hatimu di tempatku, dan terima kasih sudah berani untuk jujur.</p>
+                <p>Aku tahu ke depannya mungkin nggak selalu mulus, tapi aku percaya kalau kita lewati bareng-bareng, semuanya pasti akan terasa indah. Tolong bantu aku juga untuk jadi versi terbaik buat mendampingi kamu, ya?</p>
+                <p>Mulai detik ini, status kita bukan lagi sekadar teman. Jaga kesehatanmu dengan baik, karena sekarang ada aku yang bakal selalu cerewet buat ngingetin kamu setiap harinya.</p>
+                
+                <p style="margin-top: 35px; font-weight: bold; color: #FF69B4; text-align: center; font-size: 1.1rem;">
+                    Semenjak hari ini, kita adalah "Kita". 🤍
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Musik & Kontrol -->
+    <div class="music-container">
+        <button id="musicBtn">🔇</button>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1">
+    </div>
+
+    <!-- Masukkan lagu romantis di sini -->
+    <audio id="bgMusic" loop><source src="lagu.mp3" type="audio/mp3"></audio>
+
+    <script>
+        function showPage(num) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page' + num).classList.add('active');
+        }
+
+        const music = document.getElementById("bgMusic");
+        const musicBtn = document.getElementById("musicBtn");
+        const volumeSlider = document.getElementById("volumeSlider");
+        let isPlaying = false;
+
+        musicBtn.addEventListener("click", () => {
+            if (isPlaying) { music.pause(); musicBtn.textContent = "🔇"; }
+            else { music.play(); musicBtn.textContent = "🔊"; }
+            isPlaying = !isPlaying;
+        });
+        volumeSlider.addEventListener("input", (e) => { music.volume = e.target.value; });
+
+        // Efek Kelopak Bunga / Hati Romantis
+        const canvas = document.getElementById("heart-canvas");
+        const ctx = canvas.getContext("2d");
+        let particles = [];
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        class Particle {
+            constructor() { 
+                this.x = Math.random() * canvas.width; 
+                this.y = Math.random() * -canvas.height; 
+                this.size = Math.random() * 4 + 2; 
+                this.speedY = Math.random() * 1 + 0.5; 
+                this.speedX = Math.random() * 1 - 0.5;
+                this.opacity = Math.random() * 0.5 + 0.4; 
+                this.color = Math.random() > 0.5 ? '#FF69B4' : '#FFC0CB'; // Pink & Light Pink
+            }
+            update() { 
+                this.y += this.speedY; 
+                this.x += this.speedX;
+                if (this.y > canvas.height) {
+                    this.y = -10;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() { 
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.beginPath();
+                // Menggambar lingkaran kelopak lembut
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); 
+                ctx.fill();
+                ctx.globalAlpha = 1.0;
+            }
+        }
+        function create() { for(let i=0; i<60; i++) particles.push(new Particle()); }
+        function anim() { 
+            ctx.clearRect(0,0,canvas.width,canvas.height); 
+            particles.forEach(p => {p.update(); p.draw();}); 
+            requestAnimationFrame(anim); 
+        }
+        create(); anim();
+    </script>
+</body>
+</html>
