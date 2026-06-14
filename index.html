@@ -245,15 +245,23 @@
     <audio id="bgMusic" loop><source src="lagu.mp3" type="audio/mp3"></audio>
 
     <script>
-        function showPage(num) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page' + num).classList.add('active');
-        }
-
         const music = document.getElementById("bgMusic");
         const musicBtn = document.getElementById("musicBtn");
         const volumeSlider = document.getElementById("volumeSlider");
         let isPlaying = false;
+
+        function showPage(num) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page' + num).classList.add('active');
+            
+            // Trik Jitu: Ketika tombol pertama diklik, langsung paksa musik berputar otomatis
+            if (num === 2 && !isPlaying) {
+                music.play().then(() => {
+                    isPlaying = true;
+                    musicBtn.textContent = "🔊";
+                }).catch(err => console.log("Autoplay diblokir oleh browser, harus klik manual"));
+            }
+        }
 
         musicBtn.addEventListener("click", () => {
             if (isPlaying) { music.pause(); musicBtn.textContent = "🔇"; }
@@ -281,7 +289,7 @@
                 this.speedY = Math.random() * 1 + 0.5; 
                 this.speedX = Math.random() * 1 - 0.5;
                 this.opacity = Math.random() * 0.5 + 0.4; 
-                this.color = Math.random() > 0.5 ? '#FF69B4' : '#FFC0CB'; // Pink & Light Pink
+                this.color = Math.random() > 0.5 ? '#FF69B4' : '#FFC0CB';
             }
             update() { 
                 this.y += this.speedY; 
